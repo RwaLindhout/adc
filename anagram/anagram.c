@@ -24,32 +24,38 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
+#include <ctype.h>
 
-void checkLength(int size) {
+int checkLength() {
 	char *arr;
-	int counter = 0, j=0;
+	int counter = 0, i=0, space = 0;
 	arr = malloc(100*sizeof(char));
-	for(int i = 0; i < size; i++) {
-		while(arr[j] != '.') {
-		arr[j] = getchar();
-		counter++;
-		j++;
-		printf("%d",counter);
-	}
-	}
-
-
-printf("%d\n", counter);
+		for(i=0; (arr[i] = getchar())!='.'; i++) {
+			
+			if(arr[i] == ' ') {
+				space++;
+			}
+		}
+	return counter = i - space - 1;
 }
+
+int makeHistogram(int *array) {
+	
+	}
+
 
 int main(int argc, char **argv)
 {
-	int n, m;
+	int n, m, counter[100];
 	scanf("%d", &n);
-	checkLength(n);
+	for(int i = 0 ; i < n; i++) {
+		counter[i] = checkLength();
+		printf("%d\n", counter[i]);
+	}
 	scanf("%d", &m);
-	checkLength(m);
+	for(int j = 0; j < m; j++) {
+		checkLength();
+	}
 	
 	//findAnagram();
 	
