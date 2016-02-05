@@ -26,7 +26,16 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int checkLength() {
+int **mkArray(int size, int size1) {
+	int row, **arr;
+	arr = malloc(size*sizeof(int *));
+	for(row= 0; row < size; row++) {
+		arr[row] = malloc(size1*sizeof(int));
+	}
+	return arr;
+}
+
+int checkLength() { 
 	char *arr;
 	int counter = 0, i=0, space = 0;
 	arr = malloc(100*sizeof(char));
@@ -43,21 +52,37 @@ int makeHistogram(int *array) {
 	
 	}
 
+void checkIfSame(int *array, int *array1, int size, int size1) {
+	int roenes[size][size1];
+	for(int i = 0; i < size; i++) {
+		for(int j = 0; j < size1; j++) {
+			if(array[j] == array1[i]) {
+				roenes[i][0] = array[j];
+				roenes[0][j] = array[i];
+			}
+		}
+	}
+}
+
+
 
 int main(int argc, char **argv)
 {
-	int n, m, counter[100];
+	int n, m, *counter, *counter1, i;
+	counter = malloc(n*sizeof(int));
+	counter1 = malloc(m*sizeof(int));
 	scanf("%d", &n);
-	for(int i = 0 ; i < n; i++) {
+	for(i = 0 ; i < n; i++) {
 		counter[i] = checkLength();
-		printf("%d\n", counter[i]);
 	}
 	scanf("%d", &m);
 	for(int j = 0; j < m; j++) {
-		checkLength();
+		counter1[j] = checkLength();
 	}
 	
-	//findAnagram();
+	for(int i = 0; i < n; i++) {
+		printf("%d\n", counter[i]);
+	}
 	
 	return 0;
 }
