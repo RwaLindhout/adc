@@ -34,7 +34,16 @@ int **mkArray(int size, int size1) {
 	}
 	return arr;
 }
-
+int checkLengthSentence() {
+char c;
+int n;
+while ((c != '.')) {
+	c=getchar();
+	if ((c>='a') && (c<='z')) {
+	n++;	
+		}
+	}	
+}
 int checkLength() { 
 	char *arr;
 	int counter = 0, i=0, space = 0;
