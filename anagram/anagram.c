@@ -29,8 +29,8 @@
 int **mkArray(int size) {
 	int row, **arr;
 	arr = malloc(size*sizeof(int *));
-	for(row= 0; row < size; row++) {
-		arr[row] = malloc(26*sizeof(int));
+	for(row = 0; row < size; row++) {
+		arr[row] = malloc(27*sizeof(int));
 	}
 	return arr;
 }
@@ -48,22 +48,19 @@ int checkLength() {
 	return counter = i - space - 1;
 }
 
-int makeHistogram(int size) {
+void **makeHistogram(int **arr) {
 	char c;
-	int **a;
-	int i;
-	a = mkArray(size);
+	int i = 0;
 	c = ' ';
 	while(c != '.') {
 		c = getchar();
 		if(c >= 'a' && c <= 'z') {
-			a[i][c-'a']++;
-			a[i][26]++;
+			arr[i][c-'a']++;
+			arr[i][26]++;
 			i++;
 		}
 	}
 	c = getchar();
-	return **a;
 }
 
 
@@ -75,18 +72,37 @@ int main(int argc, char **argv)
 	scanf("%d", &n);
 	normalS = mkArray(n);
 	for(i = 0 ; i < n; i++) {
-		normalS = makeHistogram(n);
+		makeHistogram(normalS);
 	}
 	scanf("%d", &m);
 	testS = mkArray(m);
 	for(int j = 0; j < m; j++) {
-		testS[i][] = makeHistogram();
+		makeHistogram(testS);
+	}
+	
+	for(int i = 0; i < n; m++) {
+		printf("%d\n", normalS[i][26]);
+		}
+	
+	for(int i = 0; i < m; i++) {
+		for(int j = 0; j < n; i++) {
+			for(int k = 0; k < 26; k++) {
+				if(testS[i][k] != normalS[j][k]) {
+					break;
+				}
+				else if(testS[i][k] == normalS[j][k]) {
+					
+				}
+			}
+		}
 	}
 	
 	for(int i = 0; i < n; i++) {
 		//printf("%d\n", counter[i]);
 	}
-	
+	for(int i = 0; i < n; i++) {
+		
+	}
 	return 0;
 }
 
