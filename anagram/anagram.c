@@ -35,28 +35,15 @@ int **mkArray(int size) {
 	return arr;
 }
 
-int checkLength() { 
-	char *arr;
-	int counter = 0, i=0, space = 0;
-	arr = malloc(100*sizeof(char));
-		for(i=0; (arr[i] = getchar())!='.'; i++) {
-			
-			if(arr[i] == ' ') {
-				space++;
-			}
-		}
-	return counter = i - space - 1;
-}
-
-void **makeHistogram(int **arr) {
+void **makeHistogram(int **arr) { //Somehow this does still not work
 	char c;
 	int i = 0;
 	c = ' ';
 	while(c != '.') {
 		c = getchar();
 		if(c >= 'a' && c <= 'z') {
-			arr[i][c-'a']++;
-			arr[i][26]++;
+			arr[i][c - 'a']++;
+			arr[i][27]++;
 			i++;
 		}
 	}
@@ -90,16 +77,26 @@ int main(int argc, char **argv)
 				if(testS[i][k] != normalS[j][k]) {
 					break;
 				}
-				else if(testS[i][k] == normalS[j][k]) {
-					//implement function to print correct output
+				else if(testS[i][k] == normalS[j][k] && j == n-1 && testS[i][27] == normalS[i][27]) {
+					printf("%d\n", j+1);
+				}
+				else if(testS[i][k] == normalS[j][k] && j != n-1 && testS[i][27] == normalS[i][27]) {
+					printf("%d ", j+1); 
 				}
 			}
 		}
 	}
 	
 	for(int i = 0; i < n; i++) {
-		//implement free function
+		free(normalS[i]);
 	}
+	free(normalS);
+	
+	for(int i = 0; i < m; i++) {
+		free(testS[i]);
+	}
+	free(testS);
+	
 	return 0;
 }
 
