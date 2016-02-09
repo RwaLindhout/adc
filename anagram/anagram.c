@@ -26,11 +26,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int **mkArray(int size, int size1) {
+int **mkArray(int size) {
 	int row, **arr;
 	arr = malloc(size*sizeof(int *));
 	for(row= 0; row < size; row++) {
-		arr[row] = malloc(size1*sizeof(int));
+		arr[row] = malloc(26*sizeof(int));
 	}
 	return arr;
 }
@@ -48,40 +48,43 @@ int checkLength() {
 	return counter = i - space - 1;
 }
 
-int makeHistogram(int *array) {
-	
-	}
-
-void checkIfSame(int *array, int *array1, int size, int size1) {
-	int roenes[size][size1];
-	for(int i = 0; i < size; i++) {
-		for(int j = 0; j < size1; j++) {
-			if(array[j] == array1[i]) {
-				roenes[i][0] = array[j];
-				roenes[0][j] = array[i];
-			}
+int makeHistogram(int size) {
+	char c;
+	int **a;
+	int i;
+	a = mkArray(size);
+	c = ' ';
+	while(c != '.') {
+		c = getchar();
+		if(c >= 'a' && c <= 'z') {
+			a[i][c-'a']++;
+			a[i][26]++;
+			i++;
 		}
 	}
+	c = getchar();
+	return **a;
 }
-
 
 
 int main(int argc, char **argv)
 {
-	int n, m, *counter, *counter1, i;
-	counter = malloc(n*sizeof(int));
-	counter1 = malloc(m*sizeof(int));
+	int n, m, i;
+	int **testS;
+	int **normalS;
 	scanf("%d", &n);
+	normalS = mkArray(n);
 	for(i = 0 ; i < n; i++) {
-		counter[i] = checkLength();
+		normalS = makeHistogram(n);
 	}
 	scanf("%d", &m);
+	testS = mkArray(m);
 	for(int j = 0; j < m; j++) {
-		counter1[j] = checkLength();
+		testS[i][] = makeHistogram();
 	}
 	
 	for(int i = 0; i < n; i++) {
-		printf("%d\n", counter[i]);
+		//printf("%d\n", counter[i]);
 	}
 	
 	return 0;
