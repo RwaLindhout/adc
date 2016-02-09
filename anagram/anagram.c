@@ -91,17 +91,14 @@ int main(int argc, char **argv)
 					break;
 				}
 				else if(testS[i][k] == normalS[j][k]) {
-					
+					//implement function to print correct output
 				}
 			}
 		}
 	}
 	
 	for(int i = 0; i < n; i++) {
-		//printf("%d\n", counter[i]);
-	}
-	for(int i = 0; i < n; i++) {
-		
+		//implement free function
 	}
 	return 0;
 }
