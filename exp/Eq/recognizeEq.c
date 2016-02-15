@@ -65,16 +65,26 @@ int acceptCharacter(List *lp, char c) {
  * the token list. Otherwise they yield 0 and the pointer remains unchanged.
  */
 
+int acceptNegNumber (List *lp) {
+	if (!(acceptCharacter(lp, '-'))) {
+		return 0;
+	}
+	return 1;
+}
+
 int acceptNatnum(List *lp) {
       return acceptNumber(lp)
-      || acceptIdentifier(lp);
-  }
+      || acceptIdentifier(lp)
+      || acceptNegNumber(lp);
+}
+
+
 
 int acceptTerm(List *lp) {
   if ( !acceptNatnum(lp) ) {
     return 0;
   }
-  while ((acceptNatnum(lp) && acceptIdentifier(lp) && acceptCharacter(lp, '^') && acceptNatnum(lp)) || (acceptNatnum(lp) && acceptIdentifier(lp)) || acceptNatnum(lp)) {
+  while (acceptNatnum(lp) && acceptIdentifier(lp) && acceptCharacter(lp, '^') && acceptNatnum(lp) || acceptNatnum(lp) && acceptIdentifier(lp) || acceptNatnum(lp)) {
     if ( !acceptNatnum(lp) ) {
       return 0;
 	}    
