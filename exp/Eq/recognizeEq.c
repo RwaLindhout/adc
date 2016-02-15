@@ -58,7 +58,7 @@ int acceptCharacter(List *lp, char c) {
   return 0;
 }
 
-/* The functions acceptFactor, acceptTerm and acceptExpression have as
+/* The functions acceptNatnum, acceptTerm, acceptExpression and acceptEquation have as
  * argument a pointer to a token list. They check whether the token list
  * has an initial segment that can be recognized as factor, term or expression, respectively.
  * When that is the case, they yield the value 1 and the pointer points to the rest of
@@ -66,21 +66,19 @@ int acceptCharacter(List *lp, char c) {
  */
 
 int acceptNatnum(List *lp) {
-  if(acceptIdentifier(lp)) {
-    return acceptNumber(lp) || acceptIdentifier(lp);
+      return acceptNumber(lp)
+      || acceptIdentifier(lp);
   }
-  return acceptNumber(lp);
-}
 
 int acceptTerm(List *lp) {
   if ( !acceptNatnum(lp) ) {
     return 0;
   }
-  while ( acceptNatnum(lp) || (acceptNatnum(lp) && acceptIdentifier(lp)) || (acceptNatnum(lp) && acceptIdentifier(lp) && acceptCharacter(lp, '^') && acceptNatnum(lp)) ) {
+  while ((acceptNumber(lp) && acceptIdentifier(lp) && acceptCharacter(lp, '^') && acceptNumber(lp)) || (acceptNumber(lp) && acceptIdentifier(lp)) || acceptNumber(lp)) {
     if ( !acceptNatnum(lp) ) {
       return 0;
-    }
-  }   /* no * or /, so we reached the end of the term */
+	}    
+  }  
   return 1;
 }
 
@@ -92,22 +90,14 @@ int acceptExpression(List *lp) {
     if ( !acceptTerm(lp) ) {
       return 0;
     }
-  } /* no + or -, so we reached the end of the expression */
+  }   /* no * or /, so we reached the end of the expression */
   return 1;
 }
 
 int acceptEquation(List *lp) {
-  if(!acceptExpression(lp) ){
-    return 0;
-  }
-  while(acceptExpression(lp) || acceptCharacter(lp, '=')) {
-    if(!acceptExpression(lp)) {
-      if (!(acceptExpression(lp) && acceptCharacter(lp, '=') && acceptExpression(lp))) {
-        return 0;
-    }
-  }
-
-    }
+  if (!(acceptExpression(lp) && acceptCharacter(lp, '=') && acceptExpression(lp))) {
+	  return 0;
+	  }
   return 1;
 }
 
