@@ -74,7 +74,7 @@ int acceptTerm(List *lp) {
   if ( !acceptNatnum(lp) ) {
     return 0;
   }
-  while ((acceptNumber(lp) && acceptIdentifier(lp) && acceptCharacter(lp, '^') && acceptNumber(lp)) || (acceptNumber(lp) && acceptIdentifier(lp)) || acceptNumber(lp)) {
+  while ((acceptNatnum(lp) && acceptIdentifier(lp) && acceptCharacter(lp, '^') && acceptNatnum(lp)) || (acceptNatnum(lp) && acceptIdentifier(lp)) || acceptNatnum(lp)) {
     if ( !acceptNatnum(lp) ) {
       return 0;
 	}    
@@ -90,7 +90,7 @@ int acceptExpression(List *lp) {
     if ( !acceptTerm(lp) ) {
       return 0;
     }
-  }   /* no * or /, so we reached the end of the expression */
+  }   
   return 1;
 }
 
